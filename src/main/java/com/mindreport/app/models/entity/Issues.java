@@ -21,6 +21,7 @@ import javax.validation.constraints.NotEmpty;
 @Table(name="issues")
 public class Issues {
 	
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String issueKey;
