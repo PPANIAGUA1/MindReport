@@ -1,10 +1,12 @@
 package com.mindreport.app.models.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.mindreport.app.models.dao.IWorkLogDao;
 import com.mindreport.app.models.entity.WorkLog;
 
+@Service
 public class WorkLogServiceImpl implements IworkLogService{
 
 	@Autowired
