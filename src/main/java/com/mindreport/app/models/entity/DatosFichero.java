@@ -6,29 +6,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DatosFichero {
 	
-	 @JsonProperty("ruta")
+	 @JsonProperty("rutaIssue")
 	 @NotBlank
-	private String ruta;
+	private String rutaIssue;
 	
-	 @JsonProperty("tipo")
+	 @JsonProperty("rutaWorkLog")
 	 @NotBlank
-	private String tipo;
+	private String rutaWorkLog;
 
-	public String getRuta() {
-		return ruta;
+	public String getRutaIssue() {
+		return rutaIssue;
 	}
 
-	public void setRuta(String ruta) {
-		this.ruta = ruta;
+	public void setRutaIssue(String rutaIssue) {
+		this.rutaIssue = rutaIssue;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getRutaWorkLog() {
+		return rutaWorkLog;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setRutaWorkLog(String rutaWorkLog) {
+		this.rutaWorkLog = rutaWorkLog;
 	}
+
+	
 	
 	
 	
