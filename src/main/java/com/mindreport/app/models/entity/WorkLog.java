@@ -9,13 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name="workLog")
 public class WorkLog {
 	/**
 	 * 
 	 */
-
+  
+      
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,10 +27,10 @@ public class WorkLog {
 	@NotEmpty
 	private String issueKey;
 	
-	@NotEmpty
+	@NonNull
 	private Long hours;
 	
-	@NotEmpty
+	@NonNull
 	private Date workDate;
 	
 	@NotEmpty

@@ -1,5 +1,6 @@
 package com.mindreport.app.models.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name="informe")
-public class Informe {
+public class Informe implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -20,13 +23,13 @@ public class Informe {
 	@NotEmpty
 	private String issueKey;
 	
-	@NotEmpty
+	@NonNull
 	private Double hours;
 	
-	@NotEmpty
+	@NonNull
 	private Date workdate;
 	
-	@NotEmpty
+	@NonNull
 	private Date incurredDate;
 	
 	@NotEmpty
@@ -50,7 +53,7 @@ public class Informe {
 	@NotEmpty
 	private String location;
 	
-	@NotEmpty
+	@NonNull
 	private Double hoursByUserCalendar;
 	
 	@NotEmpty

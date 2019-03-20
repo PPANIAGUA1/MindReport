@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.lang.NonNull;
+
 
 @Entity
 @Table(name="issues")
@@ -23,12 +25,13 @@ public class Issues {
 	
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String issueKey;
 
-	@OneToMany (fetch = FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany (fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="issueKey")
 	private List<WorkLog> workLogs; 
+	
 	
 	@NotEmpty
 	private String issueType;
@@ -59,7 +62,7 @@ public class Issues {
 	
 	private Long progress;
 	
-	@NotEmpty
+	@NonNull
 	private Date created;
 	
 	
@@ -74,14 +77,14 @@ public class Issues {
 	
 	private String resolution;
 	
-	@NotEmpty
+	@NonNull
 	private Date realStartDate;
 	
 	private Date realEndDate;
 	
 	private Timestamp resolved;
 	
-	@NotEmpty
+	@NonNull
 	private Integer rank;
 	
 	private String gepProject;
@@ -121,7 +124,7 @@ public class Issues {
 	
 	private String keyClient;
 	
-	@NotEmpty
+	@NonNull
 	private Timestamp plannedStartedDate;
 		
 	private Double totalEstimateHours;
@@ -130,13 +133,13 @@ public class Issues {
 
 	private Timestamp plannedEndDateInitial;
 	
-	@NotEmpty
+	@NonNull
 	private Long TotalOriginalEstimate;
 	
-	@NotEmpty
+	@NonNull
 	private Long TotalTimeSpent;
 	
-	@NotEmpty
+	@NonNull
 	private Long TotalRemainingEstimate;
 	
 	private String StopReasons;
@@ -163,14 +166,7 @@ public class Issues {
 		this.issueKey = issueKey;
 	}
 
-	public List<WorkLog> getWorkLogs() {
-		return workLogs;
-	}
-
-	public void setWorkLogs(List<WorkLog> workLogs) {
-		this.workLogs = workLogs;
-	}
-
+	
 	public String getIssueType() {
 		return issueType;
 	}
@@ -609,6 +605,14 @@ public class Issues {
 
 	public void setExternalIssueId(String externalIssueId) {
 		this.externalIssueId = externalIssueId;
+	}
+
+	public List<WorkLog> getWorkLogs() {
+		return workLogs;
+	}
+
+	public void setWorkLogs(List<WorkLog> workLogs) {
+		this.workLogs = workLogs;
 	}
 	
 	
