@@ -24,7 +24,7 @@ public class WorkLog {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty
+	//@NotEmpty
 	private String issueKey;
 	
 	@NonNull

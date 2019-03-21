@@ -19,15 +19,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.mindreport.app.models.dao.IWorkLogDao;
 import com.mindreport.app.models.dao.IissuesDao;
 import com.mindreport.app.models.entity.DatosFichero;
 import com.mindreport.app.models.entity.Issues;
+import com.mindreport.app.models.entity.WorkLog;
 
 @Service
 public class IsssueServiceImpl implements IisssueService{
 
 	@Autowired
 	private IissuesDao issuesDao;
+	
+//	@Autowired
+//	private IWorkLogDao workLogDao;
 	
 	final static Logger logger = LoggerFactory.getLogger(DatosFichero.class);
 
@@ -36,7 +41,8 @@ public class IsssueServiceImpl implements IisssueService{
 	public void save(List<Issues> issues) {
 	
 		for (Issues issue : issues) {
-			
+//			List<WorkLog> workLogs = workLogDao.findByIssue(issue.getIssueKey());
+//			issue.setWorkLogs(workLogs);
 			issuesDao.save(issue);
 		}
 	}

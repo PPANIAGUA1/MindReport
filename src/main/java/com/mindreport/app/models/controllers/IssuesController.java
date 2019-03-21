@@ -40,11 +40,12 @@ public class IssuesController {
 	 {
 		
 			List<WorkLog> workLogs = workLogService.leerWorkLogDeExcel(datosFichero.getRutaWorkLog());
-			
+			List<Issues> issues = isssueService.leerIssuesDeExcel(datosFichero.getRutaIssue());
+			isssueService.save(issues);				
 			workLogService.save(workLogs);
 			
-			List<Issues> issues = isssueService.leerIssuesDeExcel(datosFichero.getRutaIssue());
-			isssueService.save(issues);	
+			
+			
 		
 		//	List<Issues> issuesYWorklogs = isssueService.findAll();
 			
