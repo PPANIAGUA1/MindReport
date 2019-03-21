@@ -2,13 +2,18 @@ package com.mindreport.app.models.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +23,7 @@ import org.springframework.util.StringUtils;
 import com.mindreport.app.models.dao.IissuesDao;
 import com.mindreport.app.models.entity.DatosFichero;
 import com.mindreport.app.models.entity.Issues;
+import com.mindreport.app.util.Util;
 
 @Service
 public class IsssueServiceImpl implements IisssueService{
@@ -85,7 +91,7 @@ public class IsssueServiceImpl implements IisssueService{
 					
 					for(Columna columna : Columna.values() ) {
 						
-						if(columna.getNombreColumna().equals(getValorDeCelda(celda))) {
+						if(columna.getNombreColumna().equals(Util.Excel.getValorDeCelda(celda))) {
 							
 							hashIndiceColumnas.put(columna, celda.getColumnIndex());
 						}
@@ -114,7 +120,7 @@ public class IsssueServiceImpl implements IisssueService{
 						
 						if(celda != null) {
 						
-							Object valorDeCelda = getValorDeCelda(celda);							
+							Object valorDeCelda = Util.Excel.getValorDeCelda(celda);							
 							informaCampoIssue(issue, columna, valorDeCelda);								
 						}					
 					}
@@ -133,26 +139,7 @@ public class IsssueServiceImpl implements IisssueService{
 		return listaIssues;
 	}
 	
-	
-	private Object getValorDeCelda(Cell celda) {
-		
-		switch (celda.getCellType()) {
-		case STRING:
-			return celda.getStringCellValue();
-		case BOOLEAN:
-			return celda.getBooleanCellValue();
-		case NUMERIC:
-			return celda.getNumericCellValue();
-		case FORMULA:
-			return celda.getCellFormula();
-		case BLANK:
-			return "";
-		default:
-			return "";
-		}
-    }		
-	
-	// ConfiguraciÃ³n especÃ­fica para la hoja en concreto
+	// Configuracion especifica para la hoja en concreto
 	
 	final static String NOMBRE_HOJA = "Sheet0";
 
@@ -161,176 +148,253 @@ public class IsssueServiceImpl implements IisssueService{
 		switch (columna) {
 		
 		case ISSUE_KEY:
-			issues.setIssueKey((String) valorDeCelda); 
+			issues.setIssueKey((String) valorDeCelda);
 			break;
 
 		case SUMMARY:
-			issues.setSummary((String) valorDeCelda); 
+			issues.setSummary((String) valorDeCelda);
 			break;
 			
 		case AFFECTS_VERSIONS:
+			issues.setAffectsVersions((String) valorDeCelda);
 			break;
 			
 		case ASSIGNEE:
+			issues.setAssignee((String) valorDeCelda);
 			break;
 			
 		case COMPONENTS:
+			issues.setComponents((String) valorDeCelda);
 			break;
 			
 		case CREATED:
+			if(!"".equals(valorDeCelda))
+				issues.setCreated((Date) valorDeCelda);
 			break;
 			
 		case CUSTOM_ESTIMATE:
+			if(!"".equals(valorDeCelda))
+				issues.setCustomEstimate((Double) valorDeCelda);
 			break;
 			
 		case DUE_DATE:
+			if(!"".equals(valorDeCelda))
+				issues.setDueDate((Date) valorDeCelda);
 			break;
 			
 		case ESTIMATION_DELIVERY_COMMITMENT:
+			issues.setEstimationDeliveryCommitment((String) valorDeCelda);
 			break;
 			
 		case EXTERNAL_ISSUE_ID:
+			issues.setExternalIssueId((String) valorDeCelda);
 			break;
 			
 		case FIX_VERSIONS:
+			issues.setFixVersions((String) valorDeCelda);
 			break;
 			
 		case GEP_PROJECT:
+			issues.setGepProject((String) valorDeCelda);
 			break;
 			
 		case ISSUE_TYPE:
-			issues.setIssueType((String) valorDeCelda); 
+			issues.setIssueType((String) valorDeCelda);
 			break;
 			
 		case KEY_CLIENT:
+			issues.setKeyClient((String) valorDeCelda);
 			break;
 			
 		case LABELS:
+			issues.setLabels((String) valorDeCelda);
 			break;
 			
 		case ORIGINAL_ESTIMATE:
+			if(!"".equals(valorDeCelda))
+				issues.setOriginalEstimate((Double) valorDeCelda);
 			break;
 			
 		case PARENT_ISSUE_KEY:
+			issues.setParentIssueKey((String) valorDeCelda);
 			break;
 			
 		case PARENT_ISSUE_SUMMARY:
+			issues.setParentIssueSummary((String) valorDeCelda);
 			break;
 			
 		case PLANNED_END_DATE:
+			if(!"".equals(valorDeCelda))
+				issues.setPlannedEndDate((Date) valorDeCelda);
 			break;
 			
 		case PLANNED_END_DATE_INITIAL:
+			if(!"".equals(valorDeCelda))
+				issues.setPlannedEndDateInitial((Date) valorDeCelda);
 			break;
 			
 		case PLANNED_START_DATE:
+			if(!"".equals(valorDeCelda))
+				issues.setPlannedStartDate((Date) valorDeCelda);			
 			break;
 			
 		case PLANNED_START_DATE_INITIAL:
+			if(!"".equals(valorDeCelda))
+				issues.setPlannedStartDateInitial((Date) valorDeCelda);			
 			break;
 			
 		case PLANNING_DELIVERY_COMMITMENT:
+			issues.setPlanningDeliveryCommitment((String) valorDeCelda);
 			break;
 			
 		case PRIORITY:
+			issues.setPriority((String) valorDeCelda);
 			break;
 			
 		case PROGRESS:
+			if(!"".equals(valorDeCelda))
+				issues.setProgress((Double) valorDeCelda);
 			break;
 			
 		case PROJECT_KEY:
+			issues.setProjectKey((String) valorDeCelda);
 			break;
 			
 		case PROJECT_PARAMETER_1:
-			break;
-			
-		case PROJECT_PARAMETER_10:
-			break;
-			
-		case PROJECT_PARAMETER_11:
-			break;
-			
-		case PROJECT_PARAMETER_12:
+			issues.setProjectParameter1((String) valorDeCelda);
 			break;
 			
 		case PROJECT_PARAMETER_2:
+			issues.setProjectParameter2((String) valorDeCelda);
 			break;
 			
 		case PROJECT_PARAMETER_3:
+			issues.setProjectParameter3((String) valorDeCelda);
 			break;
 			
 		case PROJECT_PARAMETER_4:
+			issues.setProjectParameter4((String) valorDeCelda);
 			break;
 			
 		case PROJECT_PARAMETER_5:
+			issues.setProjectParameter5((String) valorDeCelda);
 			break;
 			
 		case PROJECT_PARAMETER_6:
+			issues.setProjectParameter2((String) valorDeCelda);
 			break;
 			
 		case PROJECT_PARAMETER_7:
+			issues.setProjectParameter7((String) valorDeCelda);
 			break;
 			
 		case PROJECT_PARAMETER_8:
+			issues.setProjectParameter8((String) valorDeCelda);
 			break;
 			
 		case PROJECT_PARAMETER_9:
+			issues.setProjectParameter9((String) valorDeCelda);
+			break;
+						
+		case PROJECT_PARAMETER_10:
+			issues.setProjectParameter10((String) valorDeCelda);
 			break;
 			
+		case PROJECT_PARAMETER_11:
+			issues.setProjectParameter11((String) valorDeCelda);
+			break;
+			
+		case PROJECT_PARAMETER_12:
+			issues.setProjectParameter12((String) valorDeCelda);
+			break;			
+			
 		case RANK:
+			if(!"".equals(valorDeCelda))
+				issues.setRank((Double) valorDeCelda);
 			break;
 			
 		case REAL_END_DATE:
+			if(!"".equals(valorDeCelda))
+				issues.setRealEndDate((Date) valorDeCelda);			
 			break;
 			
 		case REAL_START_DATE:
+			if(!"".equals(valorDeCelda))
+				issues.setRealStartDate((Date) valorDeCelda);					
 			break;
 			
 		case REMAINING_ESTIMATE:
+			if(!"".equals(valorDeCelda))
+				issues.setRemainingEstimate((Double) valorDeCelda);		
 			break;
 			
 		case REPORTER:
+			issues.setReporter((String) valorDeCelda);
 			break;
 			
 		case RESOLUTION:
+			issues.setResolution((String) valorDeCelda);
 			break;
 			
 		case RESOLVED:
+			if(!"".equals(valorDeCelda))
+				issues.setResolved((Date) valorDeCelda);
 			break;
 			
 		case REWORK:
+			issues.setRework((String) valorDeCelda);
 			break;
 			
 		case SOLD_UNITS:
+			if(!"".equals(valorDeCelda))
+				issues.setSoldUnits((Double) valorDeCelda);
 			break;
 			
 		case SPRINT:
+			issues.setSprint((String) valorDeCelda);
 			break;
 			
 		case STATUS:
+			issues.setStatus((String) valorDeCelda);
 			break;
 			
 		case STOP_REASONS:
+			issues.setStopReasons((String) valorDeCelda);
 			break;
 			
 		case STORY_POINTS:
+			if(!"".equals(valorDeCelda))
+				issues.setStoryPoints((Double) valorDeCelda);
 			break;
+			
 		case TIME_SPENT:
+			if(!"".equals(valorDeCelda))
+				issues.setTimeSpent((Double) valorDeCelda);
 			break;
 			
 		case TOTAL_ESTIMATE_HOURS:
+			if(!"".equals(valorDeCelda))
+				issues.setTotalEstimateHours((Double) valorDeCelda);
 			break;
 			
 		case UPDATED:
+			if(!"".equals(valorDeCelda))
+				issues.setUpdated((Date) valorDeCelda);
 			break;
 			
-		case Î£_ORIGINAL_ESTIMATE:
+		case TOTAL_ORIGINAL_ESTIMATE:
+			if(!"".equals(valorDeCelda))
+				issues.setTotalOriginalEstimate((Double) valorDeCelda);			
 			break;
 			
-		case Î£_REMAINING_ESTIMATE:
+		case TOTAL_REMAINING_ESTIMATE:
+			if(!"".equals(valorDeCelda))
+				issues.setTotalRemainingEstimate((Double) valorDeCelda);					
 			break;
 			
-		case Î£_TIME_SPENT:
+		case TOTAL_TIME_SPENT:
+			if(!"".equals(valorDeCelda))
+				issues.setTotalTimeSpent((Double) valorDeCelda);					
 			break;
 		}
 	}
@@ -382,9 +446,9 @@ public class IsssueServiceImpl implements IisssueService{
 		TOTAL_ESTIMATE_HOURS("Total Estimate Hours"),
 		PLANNED_START_DATE_INITIAL("Planned Start Date Initial"),
 		PLANNED_END_DATE_INITIAL("Planned End Date Initial"),
-		Î£_ORIGINAL_ESTIMATE("Î£ Original Estimate"),
-		Î£_TIME_SPENT("Î£ Time Spent"),
-		Î£_REMAINING_ESTIMATE("Î£ Remaining Estimate"),
+		TOTAL_ORIGINAL_ESTIMATE("\u03A3 Original Estimate"),
+		TOTAL_TIME_SPENT("\u03A3 Time Spent"),
+		TOTAL_REMAINING_ESTIMATE("\u03A3 Remaining Estimate"),
 		STOP_REASONS("Stop Reasons"),
 		ESTIMATION_DELIVERY_COMMITMENT("Estimation Delivery Commitment"),
 		PLANNING_DELIVERY_COMMITMENT("Planning Delivery Commitment"),
