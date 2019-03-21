@@ -8,6 +8,6 @@ public interface IinformeService {
 
 	public List<Informe> generarInforme();
 
-	public Informe generarInforme2(); 
+//	public  List<Informe> generarInforme2(); 
 	
 }

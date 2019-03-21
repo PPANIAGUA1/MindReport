@@ -12,6 +12,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.lang.NonNull;
 
+
 @Entity
 @Table(name="informe")
 public class Informe implements Serializable {
@@ -27,7 +28,7 @@ public class Informe implements Serializable {
 	private Double hours;
 	
 	@NonNull
-	private Date workdate;
+	private String workdate;
 	
 	@NonNull
 	private Date incurredDate;
@@ -50,16 +51,16 @@ public class Informe implements Serializable {
 	@NotEmpty
 	private String component;
 	
-	@NotEmpty
+	
 	private String location;
 	
-	@NonNull
+
 	private Double hoursByUserCalendar;
+
 	
-	@NotEmpty
 	private String projectGroup;
 	
-	@NotEmpty
+
 	private String month;
 
 	public String getId() {
@@ -86,11 +87,11 @@ public class Informe implements Serializable {
 		this.hours = hours;
 	}
 
-	public Date getWorkdate() {
+	public String getWorkdate() {
 		return workdate;
 	}
 
-	public void setWorkdate(Date workdate) {
+	public void setWorkdate(String workdate) {
 		this.workdate = workdate;
 	}
 
