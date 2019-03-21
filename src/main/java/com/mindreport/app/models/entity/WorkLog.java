@@ -32,29 +32,21 @@ public class WorkLog {
 	
 	@NonNull
 	private Date workDate;
-	
-	@NotEmpty
+
 	private String summary;
 	
-	@NotEmpty
 	private String login;
 	
-	@NotEmpty
 	private String fullName;
 	
-	@NotEmpty
 	private String status;
 	
-	@NotEmpty
 	private String issueType;
-	
-	@NotEmpty
+
 	private String projectKey;
 	
-	@NotEmpty
 	private String description;
 	
-	@NotEmpty
 	private String phase ;
 	
 	private String version;

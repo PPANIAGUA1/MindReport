@@ -39,12 +39,13 @@ public class IssuesController {
 	  public List<Informe> createReport(@RequestBody DatosFichero datosFichero) 
 	 {
 		
-			List<Issues> issues = isssueService.leerIssuesDeExcel(datosFichero.getRutaIssue());
 			List<WorkLog> workLogs = workLogService.leerWorkLogDeExcel(datosFichero.getRutaWorkLog());
-
-			isssueService.save(issues);	
+			
 			workLogService.save(workLogs);
-
+			
+			List<Issues> issues = isssueService.leerIssuesDeExcel(datosFichero.getRutaIssue());
+			isssueService.save(issues);	
+		
 		//	List<Issues> issuesYWorklogs = isssueService.findAll();
 			
 		List<Informe> informes = informeService.generarInforme();
