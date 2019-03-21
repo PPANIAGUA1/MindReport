@@ -23,6 +23,7 @@ import org.springframework.util.StringUtils;
 import com.mindreport.app.models.dao.IWorkLogDao;
 import com.mindreport.app.models.entity.DatosFichero;
 import com.mindreport.app.models.entity.WorkLog;
+import com.mindreport.app.util.Util;
 
 @Service
 public class WorkLogServiceImpl implements IworkLogService{
@@ -73,7 +74,7 @@ public class WorkLogServiceImpl implements IworkLogService{
 					
 					for(Columna columna : Columna.values() ) {
 						
-						if(columna.getNombreColumna().equals(getValorDeCelda(celda))) {
+						if(columna.getNombreColumna().equals(Util.Excel.getValorDeCelda(celda))) {
 							
 							hashIndiceColumnas.put(columna, celda.getColumnIndex());
 						}
@@ -102,7 +103,7 @@ public class WorkLogServiceImpl implements IworkLogService{
 						
 						if(celda != null) {
 						
-							Object valorDeCelda = getValorDeCelda(celda);							
+							Object valorDeCelda = Util.Excel.getValorDeCelda(celda);							
 							informaCampoWorkLog(workLog, columna, valorDeCelda);								
 						}					
 					}
@@ -121,25 +122,6 @@ public class WorkLogServiceImpl implements IworkLogService{
 		return listaWorkLog;
 	}
 	
-	
-	private Object getValorDeCelda(Cell celda) {
-		
-		switch (celda.getCellType()) {
-		case STRING:
-			return celda.getStringCellValue();
-		case BOOLEAN:
-			return celda.getBooleanCellValue();
-		case NUMERIC:
-			return celda.getNumericCellValue();
-		case FORMULA:
-			return celda.getCellFormula();
-		case BLANK:
-			return "";
-		default:
-			return "";
-		}
-    }		
-	
 	// Configuración específica para la hoja en concreto
 	
 	final static String NOMBRE_HOJA = "Sheet0";
@@ -147,59 +129,74 @@ public class WorkLogServiceImpl implements IworkLogService{
 	void informaCampoWorkLog(WorkLog workLog, Columna columna, Object valorDeCelda) {
 
 		switch (columna) {
-		
-		case ISSUE_KEY:
-			workLog.setIssueKey((String) valorDeCelda); 
-			break;
-			
-		case FULL_NAME:
-			workLog.setFullName((String) valorDeCelda); 
-			break;
-			
 		case COMPONENTS:
+			workLog.setComponents((String) valorDeCelda);
 			break;
 			
 		case CREATED:
+			workLog.setCreated((String) valorDeCelda);
+			break;
+			
+		case FULL_NAME:
+			workLog.setFullName((String) valorDeCelda);
 			break;
 			
 		case HOURS:
+			if(!"".equals(valorDeCelda))
+				workLog.setHours((Double) valorDeCelda);
 			break;
 			
 		case INTERNAL_DESC:
+			workLog.setInternalDesc((String) valorDeCelda);
+			break;
+			
+		case ISSUE_KEY:
+			workLog.setIssueKey((String) valorDeCelda);
 			break;
 			
 		case ISSUE_TYPE:
+			workLog.setIssueType((String) valorDeCelda);
 			break;
 			
 		case KEY_CLIENT:
+			workLog.setKeyClient((String) valorDeCelda);
 			break;
 			
 		case LOGIN:
+			workLog.setLogin((String) valorDeCelda);
 			break;
 			
 		case PARENT_ISSUE_KEY:
+			workLog.setParentIssueKey((String) valorDeCelda);
 			break;
 			
 		case PHASE:
+			workLog.setPhase((String) valorDeCelda);
 			break;
 			
 		case PROJECT_KEY:
+			workLog.setProjectKey((String) valorDeCelda);
 			break;
 			
 		case STATUS:
+			workLog.setStatus((String) valorDeCelda);
 			break;
 			
 		case SUMMARY:
+			workLog.setSummary((String) valorDeCelda);
 			break;
 			
 		case VERSION:
+			workLog.setVersion((String) valorDeCelda);
 			break;
 			
 		case WORKDATE:
+			workLog.setWorkDate((String) valorDeCelda);
 			break;
 			
 		case WORKLOG_DESCRIPTION:
-			break;		
+			workLog.setWorklogDescription((String) valorDeCelda);
+			break;
 		}
 	}
 	

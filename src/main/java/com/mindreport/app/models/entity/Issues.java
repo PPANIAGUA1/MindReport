@@ -1,6 +1,5 @@
 package com.mindreport.app.models.entity;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class Issues {
 	@Id
 	private String issueKey;
 
-	@OneToMany (fetch = FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany (fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="issueKey")
 	private List<WorkLog> workLogs; 
 	
@@ -40,13 +39,13 @@ public class Issues {
 	
 	private Double customEstimate;
 		
-	private Long originalEstimate;
+	private Double originalEstimate;
 	
-	private Long timeSpent;
+	private Double timeSpent;
 	
-	private Long remainingEstimate;
+	private Double remainingEstimate;
 	
-	private Long progress;
+	private Double progress;
 
 	private Date created;
 	
@@ -54,9 +53,11 @@ public class Issues {
 
 	private String status;
 	
-	private Timestamp plannedEndDate;
+	private Date dueDate;
 	
-	private String spring;
+	private Date plannedEndDate;
+	
+	private String sprint;
 	
 	private String resolution;
 
@@ -64,15 +65,15 @@ public class Issues {
 	
 	private Date realEndDate;
 	
-	private Timestamp resolved;
+	private Date resolved;
 
-	private Integer rank;
+	private Double rank;
 	
 	private String gepProject;
 	
 	private String labels;
 		
-	private String  storyPoints;
+	private Double storyPoints;
 	
 	private String projectParameter1;
 	
@@ -104,29 +105,29 @@ public class Issues {
 	
 	private String keyClient;
 
-	private Timestamp plannedStartedDate;
+	private Date plannedStartDate;
 		
 	private Double totalEstimateHours;
 	
-	private Timestamp plannedStartedDateInitial;
+	private Date plannedStartDateInitial;
 
-	private Timestamp plannedEndDateInitial;
+	private Date plannedEndDateInitial;
 
-	private Long TotalOriginalEstimate;
+	private Double totalOriginalEstimate;
 
-	private Long TotalTimeSpent;
+	private Double totalTimeSpent;
 
-	private Long TotalRemainingEstimate;
+	private Double totalRemainingEstimate;
 	
-	private String StopReasons;
+	private String stopReasons;
 	
-	private Date estimationDeliveryCommitment;
+	private String estimationDeliveryCommitment;
 	
-	private Date planningDeliveryCommitment;
+	private String planningDeliveryCommitment;
 	
 	private String rework;
 	
-	private String soldUnits;	
+	private Double soldUnits;	
 	
 	private String projectParameter11;
 	
@@ -214,35 +215,35 @@ public class Issues {
 		this.customEstimate = customEstimate;
 	}
 
-	public Long getOriginalEstimate() {
+	public Double getOriginalEstimate() {
 		return originalEstimate;
 	}
 
-	public void setOriginalEstimate(Long originalEstimate) {
+	public void setOriginalEstimate(Double originalEstimate) {
 		this.originalEstimate = originalEstimate;
 	}
 
-	public Long getTimeSpent() {
+	public Double getTimeSpent() {
 		return timeSpent;
 	}
 
-	public void setTimeSpent(Long timeSpent) {
+	public void setTimeSpent(Double timeSpent) {
 		this.timeSpent = timeSpent;
 	}
 
-	public Long getRemainingEstimate() {
+	public Double getRemainingEstimate() {
 		return remainingEstimate;
 	}
 
-	public void setRemainingEstimate(Long remainingEstimate) {
+	public void setRemainingEstimate(Double remainingEstimate) {
 		this.remainingEstimate = remainingEstimate;
 	}
 
-	public Long getProgress() {
+	public Double getProgress() {
 		return progress;
 	}
 
-	public void setProgress(Long progress) {
+	public void setProgress(Double progress) {
 		this.progress = progress;
 	}
 
@@ -270,20 +271,28 @@ public class Issues {
 		this.status = status;
 	}
 
-	public Timestamp getPlannedEndDate() {
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public Date getPlannedEndDate() {
 		return plannedEndDate;
 	}
 
-	public void setPlannedEndDate(Timestamp plannedEndDate) {
+	public void setPlannedEndDate(Date plannedEndDate) {
 		this.plannedEndDate = plannedEndDate;
 	}
 
-	public String getSpring() {
-		return spring;
+	public String getSprint() {
+		return sprint;
 	}
 
-	public void setSpring(String spring) {
-		this.spring = spring;
+	public void setSprint(String sprint) {
+		this.sprint = sprint;
 	}
 
 	public String getResolution() {
@@ -310,19 +319,19 @@ public class Issues {
 		this.realEndDate = realEndDate;
 	}
 
-	public Timestamp getResolved() {
+	public Date getResolved() {
 		return resolved;
 	}
 
-	public void setResolved(Timestamp resolved) {
+	public void setResolved(Date resolved) {
 		this.resolved = resolved;
 	}
 
-	public Integer getRank() {
+	public Double getRank() {
 		return rank;
 	}
 
-	public void setRank(Integer rank) {
+	public void setRank(Double rank) {
 		this.rank = rank;
 	}
 
@@ -342,11 +351,11 @@ public class Issues {
 		this.labels = labels;
 	}
 
-	public String getStoryPoints() {
+	public Double getStoryPoints() {
 		return storyPoints;
 	}
 
-	public void setStoryPoints(String storyPoints) {
+	public void setStoryPoints(Double storyPoints) {
 		this.storyPoints = storyPoints;
 	}
 
@@ -470,12 +479,12 @@ public class Issues {
 		this.keyClient = keyClient;
 	}
 
-	public Timestamp getPlannedStartedDate() {
-		return plannedStartedDate;
+	public Date getPlannedStartDate() {
+		return plannedStartDate;
 	}
 
-	public void setPlannedStartedDate(Timestamp plannedStartedDate) {
-		this.plannedStartedDate = plannedStartedDate;
+	public void setPlannedStartDate(Date plannedStartDate) {
+		this.plannedStartDate = plannedStartDate;
 	}
 
 	public Double getTotalEstimateHours() {
@@ -486,67 +495,67 @@ public class Issues {
 		this.totalEstimateHours = totalEstimateHours;
 	}
 
-	public Timestamp getPlannedStartedDateInitial() {
-		return plannedStartedDateInitial;
+	public Date getPlannedStartDateInitial() {
+		return plannedStartDateInitial;
 	}
 
-	public void setPlannedStartedDateInitial(Timestamp plannedStartedDateInitial) {
-		this.plannedStartedDateInitial = plannedStartedDateInitial;
+	public void setPlannedStartDateInitial(Date plannedStartDateInitial) {
+		this.plannedStartDateInitial = plannedStartDateInitial;
 	}
 
-	public Timestamp getPlannedEndDateInitial() {
+	public Date getPlannedEndDateInitial() {
 		return plannedEndDateInitial;
 	}
 
-	public void setPlannedEndDateInitial(Timestamp plannedEndDateInitial) {
+	public void setPlannedEndDateInitial(Date plannedEndDateInitial) {
 		this.plannedEndDateInitial = plannedEndDateInitial;
 	}
 
-	public Long getTotalOriginalEstimate() {
-		return TotalOriginalEstimate;
+	public Double getTotalOriginalEstimate() {
+		return totalOriginalEstimate;
 	}
 
-	public void setTotalOriginalEstimate(Long totalOriginalEstimate) {
-		TotalOriginalEstimate = totalOriginalEstimate;
+	public void setTotalOriginalEstimate(Double totalOriginalEstimate) {
+		this.totalOriginalEstimate = totalOriginalEstimate;
 	}
 
-	public Long getTotalTimeSpent() {
-		return TotalTimeSpent;
+	public Double getTotalTimeSpent() {
+		return totalTimeSpent;
 	}
 
-	public void setTotalTimeSpent(Long totalTimeSpent) {
-		TotalTimeSpent = totalTimeSpent;
+	public void setTotalTimeSpent(Double totalTimeSpent) {
+		this.totalTimeSpent = totalTimeSpent;
 	}
 
-	public Long getTotalRemainingEstimate() {
-		return TotalRemainingEstimate;
+	public Double getTotalRemainingEstimate() {
+		return totalRemainingEstimate;
 	}
 
-	public void setTotalRemainingEstimate(Long totalRemainingEstimate) {
-		TotalRemainingEstimate = totalRemainingEstimate;
+	public void setTotalRemainingEstimate(Double totalRemainingEstimate) {
+		this.totalRemainingEstimate = totalRemainingEstimate;
 	}
 
 	public String getStopReasons() {
-		return StopReasons;
+		return stopReasons;
 	}
 
 	public void setStopReasons(String stopReasons) {
-		StopReasons = stopReasons;
+		this.stopReasons = stopReasons;
 	}
 
-	public Date getEstimationDeliveryCommitment() {
+	public String getEstimationDeliveryCommitment() {
 		return estimationDeliveryCommitment;
 	}
 
-	public void setEstimationDeliveryCommitment(Date estimationDeliveryCommitment) {
+	public void setEstimationDeliveryCommitment(String estimationDeliveryCommitment) {
 		this.estimationDeliveryCommitment = estimationDeliveryCommitment;
 	}
 
-	public Date getPlanningDeliveryCommitment() {
+	public String getPlanningDeliveryCommitment() {
 		return planningDeliveryCommitment;
 	}
 
-	public void setPlanningDeliveryCommitment(Date planningDeliveryCommitment) {
+	public void setPlanningDeliveryCommitment(String planningDeliveryCommitment) {
 		this.planningDeliveryCommitment = planningDeliveryCommitment;
 	}
 
@@ -558,11 +567,11 @@ public class Issues {
 		this.rework = rework;
 	}
 
-	public String getSoldUnits() {
+	public Double getSoldUnits() {
 		return soldUnits;
 	}
 
-	public void setSoldUnits(String soldUnits) {
+	public void setSoldUnits(Double soldUnits) {
 		this.soldUnits = soldUnits;
 	}
 
@@ -589,6 +598,5 @@ public class Issues {
 	public void setExternalIssueId(String externalIssueId) {
 		this.externalIssueId = externalIssueId;
 	}
-	
 	
 }

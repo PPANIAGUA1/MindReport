@@ -1,52 +1,34 @@
 package com.mindreport.app.models.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-
-import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name="workLog")
 public class WorkLog {
-	/**
-	 * 
-	 */
-  
-      
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
-	//@NotEmpty
 	private String issueKey;
-	
-	@NonNull
-	private Long hours;
-	
-	@NonNull
-	private Date workDate;
+
+	private Double hours;
+
+	private String workDate;
 
 	private String summary;
-	
+
 	private String login;
-	
+
 	private String fullName;
-	
+
 	private String status;
-	
+
 	private String issueType;
 
 	private String projectKey;
-	
-	private String description;
-	
+
+	private String worklogDescription;
+
 	private String phase ;
 	
 	private String version;
@@ -55,19 +37,11 @@ public class WorkLog {
 	
 	private String parentIssueKey;
 	
-	private Date created;
+	private String created;
 	
 	private String keyClient;
 	
 	private String internalDesc;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getIssueKey() {
 		return issueKey;
@@ -77,19 +51,19 @@ public class WorkLog {
 		this.issueKey = issueKey;
 	}
 
-	public Long getHours() {
+	public Double getHours() {
 		return hours;
 	}
 
-	public void setHours(Long hours) {
+	public void setHours(Double hours) {
 		this.hours = hours;
 	}
 
-	public Date getWorkDate() {
+	public String getWorkDate() {
 		return workDate;
 	}
 
-	public void setWorkDate(Date workDate) {
+	public void setWorkDate(String workDate) {
 		this.workDate = workDate;
 	}
 
@@ -141,12 +115,12 @@ public class WorkLog {
 		this.projectKey = projectKey;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getWorklogDescription() {
+		return worklogDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setWorklogDescription(String worklogDescription) {
+		this.worklogDescription = worklogDescription;
 	}
 
 	public String getPhase() {
@@ -181,11 +155,11 @@ public class WorkLog {
 		this.parentIssueKey = parentIssueKey;
 	}
 
-	public Date getCreated() {
+	public String getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(String created) {
 		this.created = created;
 	}
 
