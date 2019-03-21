@@ -6,6 +6,8 @@ import com.mindreport.app.models.entity.Informe;
 
 public interface IinformeService {
 
-	public List<Informe> generarInforme(); 
+	public List<Informe> generarInforme();
+
+	public Informe generarInforme2(); 
 	
 }

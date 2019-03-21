@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mindreport.app.models.entity.DatosFichero;
 import com.mindreport.app.models.entity.Informe;
+import com.mindreport.app.models.entity.Issues;
+import com.mindreport.app.models.entity.WorkLog;
 import com.mindreport.app.models.service.IinformeService;
 import com.mindreport.app.models.service.IisssueService;
 import com.mindreport.app.models.service.IworkLogService;
@@ -36,8 +38,15 @@ public class IssuesController {
 	 @ResponseBody
 	  public List<Informe> createReport(@RequestBody DatosFichero datosFichero) 
 	 {
-		workLogService.leerWorkLog(datosFichero.getRutaWorkLog());		
-		isssueService.leerIssue(datosFichero.getRutaIssue());	
+		
+			List<Issues> issues = isssueService.leerIssuesDeExcel(datosFichero.getRutaIssue());
+			List<WorkLog> workLogs = workLogService.leerWorkLogDeExcel(datosFichero.getRutaWorkLog());
+
+			isssueService.save(issues);	
+			workLogService.save(workLogs);
+
+		//	List<Issues> issuesYWorklogs = isssueService.findAll();
+			
 		List<Informe> informes = informeService.generarInforme();
 		
 	    return informes;

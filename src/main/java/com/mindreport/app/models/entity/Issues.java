@@ -1,51 +1,37 @@
 package com.mindreport.app.models.entity;
 
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-
-import org.springframework.lang.NonNull;
 
 
 @Entity
 @Table(name="issues")
-public class Issues {
-	
+public class Issues {	
 	
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String issueKey;
 
-	@OneToMany (fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany (fetch = FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="issueKey")
 	private List<WorkLog> workLogs; 
 	
-	
-	@NotEmpty
 	private String issueType;
-	
-	@NotEmpty
+
 	private String priority;
 	
-	@NotEmpty
 	private String summary;
 	
-	@NotEmpty
 	private String assignee;
 	
-	@NotEmpty
 	private String reporter;
 	
 	private String fixVersions;
@@ -61,14 +47,11 @@ public class Issues {
 	private Long remainingEstimate;
 	
 	private Long progress;
-	
-	@NonNull
+
 	private Date created;
 	
-	
 	private Date updated;
-	
-	@NotEmpty
+
 	private String status;
 	
 	private Timestamp plannedEndDate;
@@ -76,15 +59,13 @@ public class Issues {
 	private String spring;
 	
 	private String resolution;
-	
-	@NonNull
+
 	private Date realStartDate;
 	
 	private Date realEndDate;
 	
 	private Timestamp resolved;
-	
-	@NonNull
+
 	private Integer rank;
 	
 	private String gepProject;
@@ -114,8 +95,7 @@ public class Issues {
 	private String projectParameter10;
 	
 	private String affectsVersions;
-	
-	@NotEmpty
+
 	private String projectKey;
 	
 	private String parentIssueKey;
@@ -123,8 +103,7 @@ public class Issues {
 	private String parentIssueSummary;
 	
 	private String keyClient;
-	
-	@NonNull
+
 	private Timestamp plannedStartedDate;
 		
 	private Double totalEstimateHours;
@@ -132,14 +111,11 @@ public class Issues {
 	private Timestamp plannedStartedDateInitial;
 
 	private Timestamp plannedEndDateInitial;
-	
-	@NonNull
+
 	private Long TotalOriginalEstimate;
-	
-	@NonNull
+
 	private Long TotalTimeSpent;
-	
-	@NonNull
+
 	private Long TotalRemainingEstimate;
 	
 	private String StopReasons;
@@ -166,7 +142,14 @@ public class Issues {
 		this.issueKey = issueKey;
 	}
 
-	
+	public List<WorkLog> getWorkLogs() {
+		return workLogs;
+	}
+
+	public void setWorkLogs(List<WorkLog> workLogs) {
+		this.workLogs = workLogs;
+	}
+
 	public String getIssueType() {
 		return issueType;
 	}
@@ -605,14 +588,6 @@ public class Issues {
 
 	public void setExternalIssueId(String externalIssueId) {
 		this.externalIssueId = externalIssueId;
-	}
-
-	public List<WorkLog> getWorkLogs() {
-		return workLogs;
-	}
-
-	public void setWorkLogs(List<WorkLog> workLogs) {
-		this.workLogs = workLogs;
 	}
 	
 	
