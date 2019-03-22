@@ -31,7 +31,7 @@ public class Informe implements Serializable {
 	private String workdate;
 	
 	@NonNull
-	private Date incurredDate;
+	private String incurredDate;
 	
 	@NotEmpty
 	private String summary;
@@ -54,14 +54,19 @@ public class Informe implements Serializable {
 	
 	private String location;
 	
-
 	private Double hoursByUserCalendar;
-
 	
 	private String projectGroup;
-	
 
 	private String month;
+	
+	private Date realStartDate;
+	
+	private Date realEndDate;
+	
+	private Date dueDate;
+	
+	private Date created;
 
 	public String getId() {
 		return id;
@@ -95,11 +100,11 @@ public class Informe implements Serializable {
 		this.workdate = workdate;
 	}
 
-	public Date getIncurredDate() {
+	public String getIncurredDate() {
 		return incurredDate;
 	}
 
-	public void setIncurredDate(Date incurredDate) {
+	public void setIncurredDate(String incurredDate) {
 		this.incurredDate = incurredDate;
 	}
 
@@ -182,6 +187,38 @@ public class Informe implements Serializable {
 
 	public void setMonth(String month) {
 		this.month = month;
+	}
+
+	public Date getRealStartDate() {
+		return realStartDate;
+	}
+
+	public void setRealStartDate(Date realStartDate) {
+		this.realStartDate = realStartDate;
+	}
+
+	public Date getRealEndDate() {
+		return realEndDate;
+	}
+
+	public void setRealEndDate(Date realEndDate) {
+		this.realEndDate = realEndDate;
+	}
+
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 		
 }

@@ -7,21 +7,19 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 
 @Entity
 @Table(name="issues")
 public class Issues {	
 	
+	
 	@Id
 	private String issueKey;
-
-	@OneToMany (fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="issueKey")
-	private List<WorkLog> workLogs; 
 	
 	private String issueType;
 
@@ -134,6 +132,9 @@ public class Issues {
 	private String projectParameter12;
 	
 	private String externalIssueId;
+	
+	@OneToMany(mappedBy="issues",fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	private List<WorkLog> workLogs; 
 
 	public String getIssueKey() {
 		return issueKey;
@@ -141,14 +142,6 @@ public class Issues {
 
 	public void setIssueKey(String issueKey) {
 		this.issueKey = issueKey;
-	}
-
-	public List<WorkLog> getWorkLogs() {
-		return workLogs;
-	}
-
-	public void setWorkLogs(List<WorkLog> workLogs) {
-		this.workLogs = workLogs;
 	}
 
 	public String getIssueType() {
@@ -598,5 +591,15 @@ public class Issues {
 	public void setExternalIssueId(String externalIssueId) {
 		this.externalIssueId = externalIssueId;
 	}
+
+	public List<WorkLog> getWorkLogs() {
+		return workLogs;
+	}
+
+	public void setWorkLogs(List<WorkLog> workLogs) {
+		this.workLogs = workLogs;
+	}
+	
+	
 	
 }

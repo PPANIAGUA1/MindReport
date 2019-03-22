@@ -1,7 +1,12 @@
 package com.mindreport.app.models.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -9,7 +14,14 @@ import javax.persistence.Table;
 public class WorkLog {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	private String issueKey;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="issues_issueKey")
+	private Issues issues;
 
 	private Double hours;
 
@@ -43,13 +55,6 @@ public class WorkLog {
 	
 	private String internalDesc;
 
-	public String getIssueKey() {
-		return issueKey;
-	}
-
-	public void setIssueKey(String issueKey) {
-		this.issueKey = issueKey;
-	}
 
 	public Double getHours() {
 		return hours;
@@ -177,6 +182,30 @@ public class WorkLog {
 
 	public void setInternalDesc(String internalDesc) {
 		this.internalDesc = internalDesc;
+	}
+
+	public Issues getIssues() {
+		return issues;
+	}
+
+	public void setIssues(Issues issues) {
+		this.issues = issues;
+	}
+/**/
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getIssueKey() {
+		return issueKey;
+	}
+
+	public void setIssueKey(String issueKey) {
+		this.issueKey = issueKey;
 	}
 	
 }
