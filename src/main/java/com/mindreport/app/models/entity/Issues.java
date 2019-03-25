@@ -20,6 +20,13 @@ public class Issues {
 	
 	@Id
 	private String issueKey;
+<<<<<<< HEAD
+=======
+
+	@OneToMany (fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="issueKey")
+	private List<WorkLog> workLogs; 
+>>>>>>> branch 'master' of https://github.com/PPANIAGUA1/MindReport
 	
 	private String issueType;
 
@@ -599,7 +606,6 @@ public class Issues {
 	public void setWorkLogs(List<WorkLog> workLogs) {
 		this.workLogs = workLogs;
 	}
-	
 	
 	
 }
