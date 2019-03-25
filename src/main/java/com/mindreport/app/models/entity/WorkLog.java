@@ -1,12 +1,11 @@
 package com.mindreport.app.models.entity;
 
 import javax.persistence.Entity;
-<<<<<<< HEAD
+
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-=======
->>>>>>> branch 'master' of https://github.com/PPANIAGUA1/MindReport
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,20 +16,15 @@ import javax.persistence.Table;
 public class WorkLog {
 
 	@Id
-<<<<<<< HEAD
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-=======
->>>>>>> branch 'master' of https://github.com/PPANIAGUA1/MindReport
 	private String issueKey;
-<<<<<<< HEAD
+
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="issues_issueKey")
 	private Issues issues;
-=======
->>>>>>> branch 'master' of https://github.com/PPANIAGUA1/MindReport
 
 	private Double hours;
 
@@ -64,16 +58,6 @@ public class WorkLog {
 	
 	private String internalDesc;
 
-<<<<<<< HEAD
-=======
-	public String getIssueKey() {
-		return issueKey;
-	}
-
-	public void setIssueKey(String issueKey) {
-		this.issueKey = issueKey;
-	}
->>>>>>> branch 'master' of https://github.com/PPANIAGUA1/MindReport
 
 	public Double getHours() {
 		return hours;
@@ -210,7 +194,7 @@ public class WorkLog {
 	public void setIssues(Issues issues) {
 		this.issues = issues;
 	}
-/**/
+
 	public Long getId() {
 		return id;
 	}
